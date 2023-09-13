@@ -1,7 +1,7 @@
 <?php
-$DBhost = "localhost";
-$DBuser = "root";
-$DBpassword = "";
+$DBhost = "db4free.net";
+$DBuser = "chriswax";
+$DBpassword = "policeman123";
 $DBname = "person";
 $conn = mysqli_connect($DBhost, $DBuser, $DBpassword, $DBname);
 
