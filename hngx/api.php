@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";
-require_once "functions.php";
+//require_once "functions.php";
 global $conn;
 
 //get the Request method sent from client e.g POST, GET, PUT and DELETE
@@ -10,6 +10,15 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 }
 
 //Initialize and get id passed for getUser, Update and delete routes
+
+function esc($value)
+{
+    global $conn;
+    $val = trim($value);
+    $val = mysqli_real_escape_string($conn, $val);
+    $val = strip_tags($val);
+    return $val;
+}
 
 $id = 0;
 if (isset($_GET['id'])) {
@@ -24,13 +33,14 @@ header("Acess-Control-Allow-Headers: Acess-Control-Allow-Headers,Content-Type, A
 
 
 
-$data = json_decode(file_get_contents("php://input"), true);
+$dataInput = json_decode(file_get_contents("php://input"), true);
 
 function getPersons()
 {
     global $conn;
     $data = array();
-    $query = "SELECT * FROM user";
+
+    $query = "SELECT * FROM persons";
     $result = mysqli_query($conn, $query) or die("Select Query Failed.");
     $count = mysqli_num_rows($result);
 
@@ -61,7 +71,7 @@ function getPerson()
             "status_code" => 501
         ];
     } else {
-        $query = "SELECT * FROM user WHERE id=$id";
+        $query = "SELECT * FROM persons WHERE id=$id";
         $result = mysqli_query($conn, $query);
         $count = mysqli_num_rows($result);
 
@@ -84,9 +94,10 @@ function getPerson()
 
 function createPerson()
 {
-    global $conn,  $data;
+    global $conn,  $dataInput;
+    $data = array();
 
-    $name = $data["name"];
+    $name = $dataInput["name"];
     $name = esc($name);   //sanitize
     $dateAdded = date("Y-m-d H:i:s");
 
@@ -96,7 +107,7 @@ function createPerson()
             "status_code" => 501
         ];
     } else {
-        $query = mysqli_query($conn, "INSERT INTO user(name, dateAdded) VALUES ('" . $name . "', '" . $dateAdded . "')") or die("Insert Query Failed");
+        $query = mysqli_query($conn, "INSERT INTO persons(name, dateAdded) VALUES ('" . $name . "', '" . $dateAdded . "')") or die("Insert Query Failed");
         if ($query) {
             $data = [
                 "message" => "Person Created Successfully",
@@ -114,17 +125,18 @@ function createPerson()
 
 function updatePerson()
 {
-    global $conn,  $data, $id;
+    global $conn,  $dataInput, $id;
+    $data = array();
     $id = $id;
-    $name = $data["name"];
+    $name = $dataInput["name"];
     $name = esc($name);   //sanitize
-    if ($name == "") {
+    if ($name == "" || $id == 0) {
         $data = [
             "message" => "Person's name is required",
             "status_code" => 501
         ];
     } else {
-        $query = mysqli_query($conn, "UPDATE user SET name ='" . $name . "' WHERE id='" . $id . "'") or die("Update Query Failed");
+        $query = mysqli_query($conn, "UPDATE persons SET name ='" . $name . "' WHERE id='" . $id . "'") or die("Update Query Failed");
         if ($query) {
             $data = [
                 "message" => "Person Updated Successfully",
@@ -145,15 +157,16 @@ function updatePerson()
 function deletePerson()
 {
     global $conn,  $id;
+    $id = $id;
     $data = array();
 
-    if ($id === 0) {
+    if ($id == 0) {
         $data = [
             "message" => "User Id must be provided",
             "status_code" => 501
         ];
     } else {
-        $query = mysqli_query($conn, "DELETE FROM user WHERE id='" . $id . "' ");
+        $query = mysqli_query($conn, "DELETE FROM persons WHERE id='" . $id . "' ");
         if ($query) {
             $data = [
                 "message" => "Person Deleted Successfully!",
