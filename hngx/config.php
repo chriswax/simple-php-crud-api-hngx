@@ -1,8 +1,8 @@
 <?php
 $DBhost = "db4free.net";
 $DBuser = "chriswax";
-$DBpassword = "policeman123";
-$DBname = "person";
+$DBpassword = "password";
+$DBname = "hngx";
 $conn = mysqli_connect($DBhost, $DBuser, $DBpassword, $DBname);
 
 if (!$conn) {
