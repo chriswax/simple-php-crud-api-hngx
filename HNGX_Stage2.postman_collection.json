@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "c230dfee-4124-4f79-8b1f-39e3f3930321",
+		"name": "HNGX_Stage2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPersons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.waxworks.name.ng/api",
+					"protocol": "http",
+					"host": [
+						"www",
+						"waxworks",
+						"name",
+						"ng"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPersonById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.waxworks.name.ng/api/2",
+					"protocol": "http",
+					"host": [
+						"www",
+						"waxworks",
+						"name",
+						"ng"
+					],
+					"path": [
+						"api",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePerson",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"sent sjajja\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.waxworks.name.ng/api",
+					"protocol": "http",
+					"host": [
+						"www",
+						"waxworks",
+						"name",
+						"ng"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePersonById",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Larry Gaga\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://www.waxworks.name.ng/api/5",
+					"protocol": "http",
+					"host": [
+						"www",
+						"waxworks",
+						"name",
+						"ng"
+					],
+					"path": [
+						"api",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePersonById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://www.waxworks.name.ng/api/5",
+					"protocol": "http",
+					"host": [
+						"www",
+						"waxworks",
+						"name",
+						"ng"
+					],
+					"path": [
+						"api",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Slack_Details_Stage1_Task",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.waxworks.name.ng/api.php?slack_name=chriswax&track=backend",
+					"protocol": "http",
+					"host": [
+						"www",
+						"waxworks",
+						"name",
+						"ng"
+					],
+					"path": [
+						"api.php"
+					],
+					"query": [
+						{
+							"key": "slack_name",
+							"value": "chriswax"
+						},
+						{
+							"key": "track",
+							"value": "backend"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
